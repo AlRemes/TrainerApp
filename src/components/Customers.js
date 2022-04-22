@@ -9,6 +9,13 @@ import AddCustomer from './crud/AddCustomer.js'
 import EditCustomer from './crud/EditCustomer.js';
 import  Snackbar  from '@mui/material/Snackbar';
 
+import IconButton from "@mui/material/IconButton";
+import DownloadIcon from '@mui/icons-material/Download';
+import { Box } from '@mui/material';
+
+
+import { CSVLink } from "react-csv";
+import Link from '@mui/material/Link';
 
 import DeleteCustomer from './crud/DeleteCustomer.js';
 
@@ -98,9 +105,16 @@ function Customers() {
     ]);
 
     return (
-        <div className="ag-theme-material" style={{height: 600, width: '100%'}}>
+        <div className="ag-theme-material" style={{height: 600, width: '100%', flex:1}}>
+            <Box style={{display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-evenly",}}>
             <AddCustomer addCustomer={addCustomer} />
-
+            
+            <Link underline='hover' variant='button' style={{marginTop:'1%', width:'20%', height:'20%', borderWidth:1, borderBottom:1, borderStyle:'solid', borderRadius:3, alignContent:'center', alignItems:'center'}}>
+            <CSVLink filename='CustomerData' data={customers}>Download Customer Data</CSVLink>
+               </Link>  
+               </Box>
                 <AgGridReact 
                     columnDefs={columns}
                     rowData={customers}
