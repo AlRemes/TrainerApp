@@ -81,6 +81,28 @@ function Customers() {
         .catch(err => console.error(err))
     }
 
+    //Making dowloaded data nicer looking
+    function customerscsv() {
+        let filtercustomer = [];
+        let filteredcustomers = [];
+        customers.map((item) => {
+            filtercustomer = {
+                firstname: item.firstname,
+        lastname:item.lastname,
+        email:item.email,
+        phone:item.phone,
+        streetaddress:item.streetaddress,
+        postcode:item.postcode,
+        city:item.city,
+        links:item.links[0].rel + ':' + item.links[0].href + 
+                ',' + item.links[1].rel + ':' + item.links[1].href + 
+                ',' + item.links[2].rel + ':' + item.links[2].href
+            }
+            filteredcustomers.push(filtercustomer)
+        })
+        return filteredcustomers
+    }
+
     const [columns] = useState([
         {headerName:'First name', field: 'firstname', sortable: true, filter:true},
         {headerName:'Last name',field: 'lastname', sortable: true, filter:true},
@@ -111,8 +133,8 @@ function Customers() {
     justifyContent: "space-evenly",}}>
             <AddCustomer addCustomer={addCustomer} />
             
-            <Link underline='hover' variant='button' style={{marginTop:'1%', width:'20%', height:'20%', borderWidth:1, borderBottom:1, borderStyle:'solid', borderRadius:3, alignContent:'center', alignItems:'center'}}>
-            <CSVLink filename='CustomerData' data={customers}>Download Customer Data</CSVLink>
+            <Link as='li' underline='hover' variant='button' style={{marginTop:'1%', width:'15%', height:'20%', fontSize:'120%', borderColor:'lightblue', borderWidth:1, borderBottom:1, borderStyle:'solid', borderRadius:3, alignContent:'center', alignItems:'center', listStyleType:'none'}}>
+            <CSVLink filename='CustomerData' data={customerscsv()}>Download <br/> Customer Data</CSVLink>
                </Link>  
                </Box>
                 <AgGridReact 
