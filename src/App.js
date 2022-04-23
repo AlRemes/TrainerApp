@@ -10,22 +10,23 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Customers from "./components/Customers.js";
 import Trainings from "./components/Trainings.js";
 import Navigation from "./components/Navigation.js";
+import Calendar from "./components/functionality/Calendar.js";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <AppBar position="static">
-          <Toolbar>
+          <Toolbar style={{backgroundColor:'whitesmoke'}}>
             <Typography variant="h6">
-              Trainers appS
               <Navigation />
             </Typography>
           </Toolbar>
         </AppBar>
         <Routes>
-          <Route exact path="/" element={<Customers />} />
+          <Route exact path="/" element={<Calendar />} />
           <Route path="/trainings" element={<Trainings />} />
+          <Route path="/customers" element={<Customers />} />
         </Routes>
       </BrowserRouter>
     </div>

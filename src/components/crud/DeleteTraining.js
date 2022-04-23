@@ -7,6 +7,7 @@ function DeleteTraining({ params, fetchTraining, setOpen, setMessage }) {
 
   const deleteThis = (link) => {
     if (window.confirm("Are you sure you want to delete?")) {
+      
       fetch(link.value[0].href, { method: "DELETE" })
         .then((response) => {
           if (!response.ok) {

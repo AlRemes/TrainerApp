@@ -33,7 +33,10 @@ function AddCustomer( {addCustomer} ){
     setOpen(false);
   };
 
+
   const handleSave = () => {
+      if (customer.email.includes('@') && customer.email.includes('.') && customer.firstname && customer.lastname
+      && customer.city && customer.phone && customer.postcode && customer.streetaddress){
       addCustomer(customer);
       setCustomer({
         firstname: '',
@@ -45,6 +48,9 @@ function AddCustomer( {addCustomer} ){
         city:''
       });
       setOpen(false);
+     } else {
+         alert('All values are not valid')
+     }
   }
 
 

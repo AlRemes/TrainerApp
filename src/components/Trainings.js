@@ -15,6 +15,7 @@ import DeleteTraining from "./crud/DeleteTraining";
 function Trainings() {
   const [trainings, setTrainings] = useState([]);
   const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
 
   const urlEnd = "/trainings";
   useEffect(() => {
@@ -58,7 +59,7 @@ function Trainings() {
       field: "date",
       sortable: true,
       filter: "agDateColumnFilter",
-      filterParams: filterParams,
+      filterParams:filterParams,
       cellRenderer: (params) =>
         format(parseISO(params.data.date), "dd/MM/yyyy"),
     },
@@ -76,14 +77,14 @@ function Trainings() {
       field: "links",
       headerName: "",
       width: 100,
-      cellRenderer: (params) => <DeleteTraining params={params} fetchTraining={fetchTraining} setOpen={setOpen} />,
+      cellRenderer: (params) => <DeleteTraining params={params} fetchTraining={fetchTraining} setOpen={setOpen} setMessage={setMessage}/>,
     },
   ]);
 
   var filterParams = {
     comparator: function (filterLocalDateAtMidnight, cellValue) {
-      var dateAsString = cellValue;
-      console.log("dateAsString");
+      console.log(cellValue)
+      var dateAsString = cellValue.toString();
       if (dateAsString == null) return -1;
       var dateParts = dateAsString.split("/");
       var cellDate = new Date(
@@ -125,7 +126,7 @@ function Trainings() {
         open={open}
         autoHideDuration={3000}
         onClose={() => setOpen(false)}
-        message="Training deleted"
+        message={message}
       />
     </>
   );

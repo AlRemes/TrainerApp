@@ -26,6 +26,6 @@ function DeleteCustomer({ params, fetchCustomer, setOpen, setMessage }) {
         <DeleteIcon />
       </IconButton>
     </>
-  );
+  )
 }
 export default DeleteCustomer;

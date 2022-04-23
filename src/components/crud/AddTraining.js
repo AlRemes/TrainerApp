@@ -37,6 +37,7 @@ function AddTraining( {addTraining} ){
   };
 
   const handleSave = () => {
+    if (training.activity && training.date && training.duration && training.customer){
       addTraining(training);
       setTraining({
         date: '',
@@ -45,6 +46,9 @@ function AddTraining( {addTraining} ){
         customer:''
       })
       setOpen(false);
+    } else {
+      alert('All values are not valid')
+    }
   }
 
 

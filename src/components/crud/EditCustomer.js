@@ -25,7 +25,6 @@ function EditCustomer( {params, updateCustomer} ){
     const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
-      console.log(params)
     setCustomer({
         firstname: params.data.firstname,
         lastname:params.data.lastname,
@@ -35,7 +34,6 @@ function EditCustomer( {params, updateCustomer} ){
         postcode:params.data.postcode,
         city:params.data.city
       })
-      console.log(params);
     setOpen(true);
   };
 
@@ -44,8 +42,13 @@ function EditCustomer( {params, updateCustomer} ){
   };
 
   const handleSave = () => {
+    if (customer.email.includes('@') && customer.email.includes('.') && customer.firstname && customer.lastname
+    && customer.city && customer.phone && customer.postcode && customer.streetaddress){
     updateCustomer(customer, params.value);
     setOpen(false);
+    } else {
+        alert('All values are not valid')
+    }
   }
 
   const inputChange = (event) => {
