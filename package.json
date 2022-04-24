@@ -14,8 +14,12 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^13.5.0",
+    "ag-grid-community": "^27.2.1",
     "ag-grid-react": "^27.2.1",
+    "chart.js": "^3.7.1",
     "date-fns": "^2.28.0",
+    "lodash.groupby": "^4.6.0",
+    "lodash.sumby": "^4.6.0",
     "moment": "^2.29.3",
     "react": "^18.0.0",
     "react-csv": "^2.2.2",
@@ -24,6 +28,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-select": "^5.3.0",
+    "recharts": "^2.1.9",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

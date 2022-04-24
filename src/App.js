@@ -11,6 +11,7 @@ import Customers from "./components/Customers.js";
 import Trainings from "./components/Trainings.js";
 import Navigation from "./components/Navigation.js";
 import Calendar from "./components/functionality/Calendar.js";
+import Statistics from './components/functionality/Statistics.js'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route exact path="/" element={<Calendar />} />
           <Route path="/trainings" element={<Trainings />} />
           <Route path="/customers" element={<Customers />} />
+          <Route path="/statistics" element={<Statistics />} />
         </Routes>
       </BrowserRouter>
     </div>
