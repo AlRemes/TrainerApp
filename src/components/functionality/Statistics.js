@@ -10,8 +10,6 @@ import sumBy from "lodash.sumby"
 
 function Statistics() {
   const [chartData, setChartData] = useState({});
-
-  const [chartOptions, setChartOptions] = useState({});
   const [trainings, setTrainings] = useState([]);
   const [open, setOpen] = useState(false)
 

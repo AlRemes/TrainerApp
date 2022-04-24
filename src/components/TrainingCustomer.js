@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react'
 
-import { AgGridReact } from 'ag-grid-react';
-
-import Container from '@mui/material/Container';
-
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
 

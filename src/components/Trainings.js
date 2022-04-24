@@ -37,6 +37,32 @@ function Trainings() {
       .then((data) => setTrainings(data.content))
       .catch((err) => console.log(err));
   };
+  
+  var filterParams = {
+    comparator: function (filterLocalDateAtMidnight, cellValue) {
+      console.log(cellValue)
+      var dateAsString = cellValue.toString();
+      if (dateAsString == null) return -1;
+      var dateParts = dateAsString.split("/");
+      var cellDate = new Date(
+        Number(dateParts[2]),
+        Number(dateParts[1]) - 1,
+        Number(dateParts[0])
+      );
+      if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
+        return 0;
+      }
+      if (cellDate < filterLocalDateAtMidnight) {
+        return -1;
+      }
+      if (cellDate > filterLocalDateAtMidnight) {
+        return 1;
+      }
+    },
+    browserDatePicker: true,
+    minValidYear: 1900,
+    maxValidYear: 2101,
+  };
 
   const addTraining = (newTraining) => {
     fetch(process.env.REACT_APP_API_URL + urlEnd, {
@@ -81,31 +107,7 @@ function Trainings() {
     },
   ]);
 
-  var filterParams = {
-    comparator: function (filterLocalDateAtMidnight, cellValue) {
-      console.log(cellValue)
-      var dateAsString = cellValue.toString();
-      if (dateAsString == null) return -1;
-      var dateParts = dateAsString.split("/");
-      var cellDate = new Date(
-        Number(dateParts[2]),
-        Number(dateParts[1]) - 1,
-        Number(dateParts[0])
-      );
-      if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
-        return 0;
-      }
-      if (cellDate < filterLocalDateAtMidnight) {
-        return -1;
-      }
-      if (cellDate > filterLocalDateAtMidnight) {
-        return 1;
-      }
-    },
-    browserDatePicker: true,
-    minValidYear: 1900,
-    maxValidYear: 2101,
-  };
+  
 
   return (
     <>
