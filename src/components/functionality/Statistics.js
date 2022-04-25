@@ -21,12 +21,12 @@ function Statistics() {
         else return response.json();
       })
       .then((data) => setTrainings(data.content))
-      .then(setVars())
+      .then(_ => setVars())
       .then(setOpen(true))
       .catch((err) => console.log(err));
   }, []);
 
-  function setVars () {
+  function setVars() {
     let data = [];
     let filteredData = [];
     data = trainings;
@@ -42,7 +42,7 @@ function Statistics() {
     Object.keys(labels).map((item, i) =>
         filteredData.push({label:item, time:sums[i]})
     )
-    console.dir(filteredData);
+    console.dir(trainings);
     
     setChartData(filteredData)
   };

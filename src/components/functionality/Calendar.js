@@ -10,6 +10,8 @@ import moment from "moment";
 
 function Calendar() {
 
+  
+
     const [trainings, setTrainings] = useState([]);
 
     const urlEnd = "/trainings";

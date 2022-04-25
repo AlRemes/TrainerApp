@@ -40,7 +40,7 @@ function Trainings() {
   
   var filterParams = {
     comparator: function (filterLocalDateAtMidnight, cellValue) {
-      console.log(cellValue)
+      console.log('cellValue')
       var dateAsString = cellValue.toString();
       if (dateAsString == null) return -1;
       var dateParts = dateAsString.split("/");
