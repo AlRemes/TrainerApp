@@ -108,7 +108,7 @@ function Customers() {
   }
 
   const [columns] = useState([
-    { headerName: "First name", field: "firstname" },
+    { headerName: "First name", field: "firstname", width:140},
     { headerName: "Last name", field: "lastname" },
     { headerName: "Street address", field: "streetaddress", width: 200 },
     { headerName: "Post Code", field: "postcode", width: 150 },

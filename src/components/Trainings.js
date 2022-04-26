@@ -45,9 +45,6 @@ function Trainings() {
       let splitMidnight = formattedMidnight.split("/");
       let splitValue = formattedValue.split("/");
 
-      console.log(splitMidnight);
-      console.log(splitValue);
-
       if (cellValue === null) return -1;
 
       if (splitMidnight[2] === splitValue[2]) {

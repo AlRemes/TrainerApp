@@ -5,7 +5,6 @@ import { BarChart, Bar, CartesianGrid, XAxis, YAxis } from 'recharts';
  
 
 function StatisticChart(props){
-console.log(props)
 return (
     <BarChart width={1000} height={500} data={props.props}>
     <Bar dataKey="time" fill="blue" />

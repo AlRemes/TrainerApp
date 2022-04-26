@@ -20,16 +20,18 @@ function Statistics() {
         if (!response.ok) throw new Error(response.status);
         else return response.json();
       })
-      .then((data) => setTrainings(data.content))
-      .then(_ => setVars())
+      .then((data) => setVars(data.content))
       .then(setOpen(true))
       .catch((err) => console.log(err));
   }, []);
 
-  function setVars() {
+  function setVars(vars) {
+
+    setTrainings(vars)
+
     let data = [];
     let filteredData = [];
-    data = trainings;
+    data = vars;
     //Saving the labels
     let labels = groupBy(data, 'activity')
     // (Object.keys(labels)) Gives labels
@@ -42,7 +44,6 @@ function Statistics() {
     Object.keys(labels).map((item, i) =>
         filteredData.push({label:item, time:sums[i]})
     )
-    console.dir(trainings);
     
     setChartData(filteredData)
   };

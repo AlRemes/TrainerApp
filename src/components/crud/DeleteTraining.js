@@ -8,7 +8,6 @@ function DeleteTraining({ params, fetchTraining, setOpen, setMessage }) {
 
   const deleteThis = (link) => {
     if (window.confirm("Are you sure you want to delete?")) {
-      console.log(link)
       fetch(process.env.REACT_APP_API_URL + postUrl + link.data.id, { method: "DELETE" })
         .then((response) => {
           if (!response.ok) {
