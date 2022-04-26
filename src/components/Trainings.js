@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { AgGridReact } from "ag-grid-react";
 
 import { format, parseISO } from "date-fns";
-import  Snackbar  from '@mui/material/Snackbar';
+import Snackbar from "@mui/material/Snackbar";
 
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
@@ -17,45 +17,56 @@ function Trainings() {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
 
-  const urlEnd = "/trainings";
   useEffect(() => {
-    fetch(process.env.REACT_APP_API_URL + urlEnd)
+    fetch(process.env.REACT_APP_API_TRAININGS)
       .then((response) => {
         if (!response.ok) throw new Error(response.status);
         else return response.json();
       })
-      .then((data) => setTrainings(data.content))
+      .then((data) => setTrainings(data))
       .catch((err) => console.log(err));
   }, []);
 
   const fetchTraining = () => {
-    fetch(process.env.REACT_APP_API_URL + urlEnd)
+    fetch(process.env.REACT_APP_API_TRAININGS)
       .then((response) => {
         if (!response.ok) throw new Error(response.status);
         else return response.json();
       })
-      .then((data) => setTrainings(data.content))
+      .then((data) => setTrainings(data))
       .catch((err) => console.log(err));
   };
-  
+
   var filterParams = {
     comparator: function (filterLocalDateAtMidnight, cellValue) {
-      console.log('cellValue')
-      var dateAsString = cellValue.toString();
-      if (dateAsString == null) return -1;
-      var dateParts = dateAsString.split("/");
-      var cellDate = new Date(
-        Number(dateParts[2]),
-        Number(dateParts[1]) - 1,
-        Number(dateParts[0])
-      );
-      if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
-        return 0;
-      }
-      if (cellDate < filterLocalDateAtMidnight) {
+      let formattedMidnight = format(filterLocalDateAtMidnight, "dd/MM/yyyy");
+      let formattedValue = format(parseISO(cellValue), "dd/MM/yyyy");
+
+      let splitMidnight = formattedMidnight.split("/");
+      let splitValue = formattedValue.split("/");
+
+      console.log(splitMidnight);
+      console.log(splitValue);
+
+      if (cellValue === null) return -1;
+
+      if (splitMidnight[2] === splitValue[2]) {
+        if (splitMidnight[1] === splitValue[1]) {
+          if (splitMidnight[0] === splitValue[0]) {
+            return 0;
+          } else if (splitMidnight[0] > splitValue[0]) {
+            return -1;
+          } else {
+            return 1;
+          }
+        } else if (splitMidnight[1] > splitValue[1]) {
+          return -1;
+        } else {
+          return 1;
+        }
+      } else if (splitMidnight[2] > splitValue[2]) {
         return -1;
-      }
-      if (cellDate > filterLocalDateAtMidnight) {
+      } else {
         return 1;
       }
     },
@@ -64,8 +75,10 @@ function Trainings() {
     maxValidYear: 2101,
   };
 
+  const postUrl = "/trainings";
+
   const addTraining = (newTraining) => {
-    fetch(process.env.REACT_APP_API_URL + urlEnd, {
+    fetch(process.env.REACT_APP_API_URL + postUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newTraining),
@@ -85,7 +98,7 @@ function Trainings() {
       field: "date",
       sortable: true,
       filter: "agDateColumnFilter",
-      filterParams:filterParams,
+      filterParams: filterParams,
       cellRenderer: (params) =>
         format(parseISO(params.data.date), "dd/MM/yyyy"),
     },
@@ -96,18 +109,23 @@ function Trainings() {
       filter: true,
       headerName: "Customer",
       width: 150,
-      field: "links.customer.href",
-      cellRenderer: (params) => <TrainingCustomer params={params} />,
+      valueGetter: (params) =>
+        params.data.customer.firstname + " " + params.data.customer.lastname,
     },
     {
-      field: "links",
+      field: "customer.id",
       headerName: "",
       width: 100,
-      cellRenderer: (params) => <DeleteTraining params={params} fetchTraining={fetchTraining} setOpen={setOpen} setMessage={setMessage}/>,
+      cellRenderer: (params) => (
+        <DeleteTraining
+          params={params}
+          fetchTraining={fetchTraining}
+          setOpen={setOpen}
+          setMessage={setMessage}
+        />
+      ),
     },
   ]);
-
-  
 
   return (
     <>
