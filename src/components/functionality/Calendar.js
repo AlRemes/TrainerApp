@@ -23,7 +23,6 @@ function Calendar() {
             else return response.json();
           })
           .then((data) => setTrainings(data.content))
-          .then(console.log(trainings))
           .catch((err) => console.log(err));
       }, []);
 

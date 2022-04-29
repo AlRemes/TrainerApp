@@ -107,7 +107,7 @@ function Trainings() {
       headerName: "Customer",
       width: 150,
       valueGetter: (params) =>
-        params.data.customer.firstname + " " + params.data.customer.lastname,
+      params.data.customer.firstname ? params.data.customer.firstname + " " + params.data.customer.lastname : ''
     },
     {
       field: "customer.id",
